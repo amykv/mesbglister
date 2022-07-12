@@ -1,11 +1,16 @@
 package com.arasvitkus.mesbglister
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import com.arasvitkus.mesbglister.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -25,5 +30,27 @@ class SplashActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
+
+        //Induce viewbinding
+        val splashAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_splash)
+        splashBinding.tvSplashAppName.animation = splashAnimation
+
+        splashAnimation.setAnimationListener(object: Animation.AnimationListener{
+            override fun onAnimationStart(p0: Animation?) {
+                //TODO("Not yet implemented")
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                    finish()
+                }, 1000)
+            }
+
+            override fun onAnimationRepeat(p0: Animation?) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }
