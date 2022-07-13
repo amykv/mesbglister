@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MESBGLister"
         tools:targetApi="31">
         <activity
-            android:name=".SplashActivity"
+            android:name=".view.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.MESBGLister.NoActionBar"
             >
@@ -26,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
 
