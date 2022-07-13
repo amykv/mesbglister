@@ -13,10 +13,15 @@ import android.view.animation.AnimationUtils
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.databinding.ActivitySplashBinding
 
+/**
+ *  Splash Screen at start of app
+ */
 class SplashActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        //Might keep line below? Trying to get splash screen to show long enough
+       // setContentView(R.layout.activity_splash)
 
         val splashBinding: ActivitySplashBinding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(splashBinding.root)
