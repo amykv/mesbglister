@@ -17,7 +17,9 @@
             android:name=".view.activities.AddUpdateListActivity"
             android:label="Add Army"
             android:theme="@style/Theme.MESBGLister.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="orientation"
+            />
         <activity
             android:name=".view.activities.SplashActivity"
             android:exported="true"
