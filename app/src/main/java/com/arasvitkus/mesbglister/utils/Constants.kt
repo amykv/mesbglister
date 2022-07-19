@@ -50,7 +50,7 @@ object Constants {
         return list
     }
 
-    fun armyPints(): ArrayList<String> {
+    fun armyPoints(): ArrayList<String> {
         val list = ArrayList<String>()
         list.add("100")
         list.add("150")

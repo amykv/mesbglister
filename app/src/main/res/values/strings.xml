@@ -19,4 +19,18 @@
     <string name="title_select_image_action">Select Image Action</string>
     <string name="lbl_camera">Camera</string>
     <string name="lbl_gallery">Gallery</string>
+
+    <string name="title_select_army_type">SELECT ARMY TYPE</string>
+    <string name="title_select_army_faction">SELECT ARMY FACTION</string>
+    <string name="title_select_army_points">SELECT TOTAL ARMY POINTS VALUE</string>
+
+    <string name="err_msg_select_army_image">Select army image.</string>
+    <string name="err_msg_enter_army_title">Enter army title.</string>
+    <string name="err_msg_select_army_type">Select army type.</string>
+    <string name="err_msg_select_army_faction">Select army faction.</string>
+    <string name="err_msg_enter_army_list">Enter army list.</string>
+    <string name="err_msg_select_army_points">Select army points value.</string>
+    <string name="err_msg_enter_army_notes">Enter army notes.</string>
+
+
 </resources>

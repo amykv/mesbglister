@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arasvitkus.mesbglister.databinding.ItemCustomListBinding
+import com.arasvitkus.mesbglister.view.activities.AddUpdateListActivity
 
 class CustomListItemAdapter(private val activity: Activity, private val listItems: List<String>, private val selection: String)
     : RecyclerView.Adapter<CustomListItemAdapter.ViewHolder>() {
@@ -21,6 +22,12 @@ class CustomListItemAdapter(private val activity: Activity, private val listItem
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listItems[position]
         holder.tvText.text = item
+
+        holder.itemView.setOnClickListener {
+            if(activity is AddUpdateListActivity){
+                activity.selectedListItem(item, selection)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

@@ -10,7 +10,6 @@ import com.arasvitkus.mesbglister.databinding.ActivityAddUpdateListBinding
 import com.arasvitkus.mesbglister.databinding.DialogCustomImageSelectionBinding
 import com.karumi.dexter.Dexter
 import android.Manifest
-import android.Manifest.permission.CAMERA
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
@@ -22,12 +21,16 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.Settings
+import android.text.TextUtils
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.graphics.drawable.toBitmap
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.arasvitkus.mesbglister.databinding.DialogCustomListBinding
+import com.arasvitkus.mesbglister.utils.Constants
+import com.arasvitkus.mesbglister.view.adapters.CustomListItemAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -45,7 +48,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
-import java.nio.channels.FileChannel
 import java.util.*
 
 //Taking care of adding and updating new army list
@@ -57,6 +59,7 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var galleryImageResultLauncher: ActivityResultLauncher<Intent>
 
     private var mImagePath: String = ""
+    private lateinit var mCustomListDialog: Dialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +73,13 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
 
         //Assign onclicklistener to iv army image
         mBinding.ivAddArmyImage.setOnClickListener (this)
+
+        mBinding.etType.setOnClickListener(this)
+        mBinding.etFaction.setOnClickListener(this)
+        mBinding.etPoints.setOnClickListener(this)
+
+        mBinding.btnAddArmy.setOnClickListener(this)
+
         onActivityResult()
     }
 
@@ -82,6 +92,23 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    fun selectedListItem(item: String, selection: String){
+        when(selection){
+            Constants.ARMY_TYPE ->{
+                mCustomListDialog.dismiss()
+                mBinding.etType.setText(item)
+            }
+            Constants.ARMY_FACTION ->{
+                mCustomListDialog.dismiss()
+                mBinding.etFaction.setText(item)
+            }
+            Constants.ARMY_POINTS ->{
+                mCustomListDialog.dismiss()
+                mBinding.etPoints.setText(item)
+            }
+        }
+    }
+
     override fun onClick(v: View?) {
         if (v != null) {
             when (v.id) {
@@ -89,6 +116,69 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
                     customImageSelectionDialog()
                     return
                 }
+                R.id.et_type -> {
+                    customItemsListDialog(resources.getString(R.string.title_select_army_type), Constants.armyTypes(), Constants.ARMY_TYPE)
+                    return
+                }
+                R.id.et_faction -> {
+                    customItemsListDialog(resources.getString(R.string.title_select_army_faction), Constants.armyFactions(), Constants.ARMY_FACTION)
+                    return
+                }
+                R.id.et_points -> {
+                    customItemsListDialog(resources.getString(R.string.title_select_army_points), Constants.armyPoints(), Constants.ARMY_POINTS)
+                    return
+                }
+
+                R.id.btn_add_army -> {
+                    //Trimming empty spaces
+                    val title = mBinding.etTitle.text.toString().trim { it <= ' '} //lambda expression to get rid of empty spaces
+                    val type = mBinding.etType.text.toString().trim { it <= ' '}
+                    val faction = mBinding.etFaction.text.toString().trim { it <= ' '}
+                    val list = mBinding.etList.text.toString().trim { it <= ' '}
+                    val points = mBinding.etPoints.text.toString().trim { it <= ' '}
+                    val notes = mBinding.etNotes.text.toString().trim { it <= ' '}
+
+                    when {
+                        TextUtils.isEmpty(mImagePath) -> {
+                            Toast.makeText(this@AddUpdateListActivity,
+                                resources.getString(R.string.err_msg_select_army_image), Toast.LENGTH_SHORT).show()
+                        }
+
+                        TextUtils.isEmpty(title) -> {
+                            Toast.makeText(this@AddUpdateListActivity,
+                                resources.getString(R.string.err_msg_enter_army_title), Toast.LENGTH_SHORT).show()
+                        }
+
+                        TextUtils.isEmpty(type) -> {
+                            Toast.makeText(this@AddUpdateListActivity,
+                                resources.getString(R.string.err_msg_select_army_type), Toast.LENGTH_SHORT).show()
+                        }
+
+                        TextUtils.isEmpty(faction) -> {
+                            Toast.makeText(this@AddUpdateListActivity,
+                                resources.getString(R.string.err_msg_select_army_faction), Toast.LENGTH_SHORT).show()
+                        }
+
+                        TextUtils.isEmpty(list) -> {
+                            Toast.makeText(this@AddUpdateListActivity,
+                                resources.getString(R.string.err_msg_enter_army_list), Toast.LENGTH_SHORT).show()
+                        }
+
+                        TextUtils.isEmpty(points) -> {
+                            Toast.makeText(this@AddUpdateListActivity,
+                                resources.getString(R.string.err_msg_select_army_points), Toast.LENGTH_SHORT).show()
+                        }
+
+                        TextUtils.isEmpty(notes) -> {
+                            Toast.makeText(this@AddUpdateListActivity,
+                                resources.getString(R.string.err_msg_enter_army_notes), Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(this@AddUpdateListActivity,"All entries are valid.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -176,11 +266,13 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
+    //Function for selecting custom image from Camera or Gallery
     private fun customImageSelectionDialog(){
         val dialog = Dialog(this)
         val binding: DialogCustomImageSelectionBinding = DialogCustomImageSelectionBinding.inflate(layoutInflater)
         dialog.setContentView(binding.root)
 
+        //Camera selection
         //Implementing Dexter library to get permissions.
         binding.tvCamera.setOnClickListener {
             Dexter.withContext(this@AddUpdateListActivity)
@@ -242,6 +334,8 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
         }
         dialog.show()
     }
+
+    //Function to dialog for setting permissions if off
     private fun showRationalDialogForPermissions() {
         AlertDialog.Builder(this)
             .setMessage("It Looks like you have turned off permissions required for this feature. It can be enabled under Application Settings")
@@ -279,6 +373,21 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         return file.absolutePath
+    }
+
+    //Function for binding and selecting Items dialog
+    private fun customItemsListDialog(title: String, itemsList: List<String>, selection: String){
+        mCustomListDialog = Dialog(this)
+        val binding : DialogCustomListBinding = DialogCustomListBinding.inflate(layoutInflater)
+
+        //custom list dialog should use complete xml file dialog_custom_list.xl
+        mCustomListDialog.setContentView(binding.root)
+        binding.tvDialogCustomListTitle.text = title
+        binding.rvList.layoutManager = LinearLayoutManager(this)
+
+        val adapter = CustomListItemAdapter(this, itemsList, selection)
+        binding.rvList.adapter = adapter
+        mCustomListDialog.show()
     }
 
     companion object{
