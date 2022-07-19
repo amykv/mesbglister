@@ -24,6 +24,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import com.bumptech.glide.Glide
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -86,7 +87,9 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
                     data?.extras?.let {
                         val thumbnail: Bitmap =
                             data.extras!!.get("data") as Bitmap // Bitmap from camera
-                        mBinding.ivArmyImage.setImageBitmap(thumbnail) // Set to the imageView.
+                        //mBinding.ivArmyImage.setImageBitmap(thumbnail) // Set to the imageView.
+                        //Glide makes it look a little better, essentially like the code above commented out.
+                        Glide.with(this).load(thumbnail).centerCrop().into(mBinding.ivArmyImage)
 
                         // Replace the add icon with edit icon once the image is selected.
                         mBinding.ivAddArmyImage.setImageDrawable(
@@ -108,7 +111,9 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
                     data?.let {
                         val selectedPhotoUri = data.data
 
-                        mBinding.ivArmyImage.setImageURI(selectedPhotoUri)
+                        //mBinding.ivArmyImage.setImageURI(selectedPhotoUri)
+                        Glide.with(this).load(selectedPhotoUri).centerCrop().into(mBinding.ivArmyImage)
+
                         mBinding.ivAddArmyImage.setImageDrawable(
                             ContextCompat.getDrawable(
                                 this@AddUpdateListActivity,
