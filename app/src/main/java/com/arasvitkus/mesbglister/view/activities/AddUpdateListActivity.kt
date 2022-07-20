@@ -61,7 +61,6 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
     private var mImagePath: String = ""
     private lateinit var mCustomListDialog: Dialog
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //mBinding should be activity that is inflated
@@ -391,8 +390,8 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     companion object{
-        private const val CAMERA = 1
-        private const val GALLERY = 2
+        //private const val CAMERA = 1
+        //private const val GALLERY = 2
         //Folder where images will be stored
         private const val IMAGE_DIRECTORY = "MESBGListerImages"
     }
