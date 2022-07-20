@@ -2,18 +2,27 @@ package com.arasvitkus.mesbglister.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.arasvitkus.mesbglister.R
+import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.view.activities.AddUpdateListActivity
 import com.arasvitkus.mesbglister.viewmodel.HomeViewModel
+import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
+import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
 
 class AllArmiesFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
+
+    private val mMesbgListerViewModel: MesbgListerViewModel by viewModels{
+        MesbgListerViewModelFactory((requireActivity().application as MesbgListerApplication).repository)
+    }
 
     // TODO Step 8: Override the onCreate function and enable setHasOptionMenu to add the action menu to Fragment.
     // START
@@ -36,6 +45,19 @@ class AllArmiesFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mMesbgListerViewModel.allArmiesList.observe(viewLifecycleOwner) {
+            armies ->
+                armies.let{
+                    for(item in it){
+                        Log.i("Army Title", "${item.id} :: ${item.title}")
+                    }
+                }
+        }
     }
 
     // TODO Step 9: Override the onCreateOptionMenu and onOptionsItemSelected methods and launch the AddUpdateDishActivity on selection.

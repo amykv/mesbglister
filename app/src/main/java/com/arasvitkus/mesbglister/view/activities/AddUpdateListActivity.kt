@@ -194,8 +194,9 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
                                 false
                             )
                             mMesbgListerViewModel.insert(mesbgListerDetails)
-                            Toast.makeText(this@AddUpdateListActivity, "You've added army details successfully.", Toast.LENGTH_SHORT).show()
-                            Log.i("Insertion", "Success")
+                            Toast.makeText(this@AddUpdateListActivity, "You've added army details successfully.",
+                                Toast.LENGTH_SHORT).show()
+                            Log.e("Insertion", "Success")
                             finish()
                         }
                     }
