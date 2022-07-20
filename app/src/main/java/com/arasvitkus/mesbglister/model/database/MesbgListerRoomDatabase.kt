@@ -8,6 +8,9 @@ import com.arasvitkus.mesbglister.model.entities.MesbgLister
 
 @Database(entities = [MesbgLister::class], version = 1)
 abstract class MesbgListerRoomDatabase : RoomDatabase() {
+
+    abstract fun mesbgListerDao(): MesbgListerDao
+
     companion object {
         @Volatile
         private var INSTANCE: MesbgListerRoomDatabase? = null
