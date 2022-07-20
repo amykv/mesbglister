@@ -8,7 +8,7 @@ import com.arasvitkus.mesbglister.model.entities.MesbgLister
 interface MesbgListerDao {
 
     //Had to remove suspend prefix from function to get to work
-    //Potential soultion due to suspend: https://youtrack.jetbrains.com/issue/KT-49761
+    //Potential solution due to suspend: https://youtrack.jetbrains.com/issue/KT-49761
     @Insert
     fun insertMesbgListerDetails(mesbgLister: MesbgLister)
 }
