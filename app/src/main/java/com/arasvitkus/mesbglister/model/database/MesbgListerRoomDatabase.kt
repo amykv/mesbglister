@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
 
-@Database(entities = [MesbgLister::class], version = 1)
+@Database(entities = [MesbgLister::class], version = 1, exportSchema = false)
 abstract class MesbgListerRoomDatabase : RoomDatabase() {
 
     abstract fun mesbgListerDao(): MesbgListerDao

@@ -8,6 +8,9 @@ object Constants {
     const val ARMY_FACTION: String = "ArmyFaction"
     const val ARMY_POINTS: String = "ArmyPoints"
 
+    const val ARMY_IMAGE_SOURCE_LOCAL : String = "Local"
+    const val ARMY_IMAGE_SOURCE_ONLINE : String = "Online"
+
     fun armyTypes():ArrayList<String>{
         val list = ArrayList<String>()
         list.add("Good")

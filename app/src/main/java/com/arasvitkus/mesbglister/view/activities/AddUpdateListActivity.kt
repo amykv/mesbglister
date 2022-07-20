@@ -25,12 +25,17 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.databinding.DialogCustomListBinding
+import com.arasvitkus.mesbglister.model.entities.MesbgLister
 import com.arasvitkus.mesbglister.utils.Constants
 import com.arasvitkus.mesbglister.view.adapters.CustomListItemAdapter
+import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
+import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -60,6 +65,10 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mImagePath: String = ""
     private lateinit var mCustomListDialog: Dialog
+
+    private val mMesbgListerViewModel : MesbgListerViewModel by viewModels {
+        MesbgListerViewModelFactory((application as MesbgListerApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -173,7 +182,21 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
                                 resources.getString(R.string.err_msg_enter_army_notes), Toast.LENGTH_SHORT).show()
                         }
                         else -> {
-                            Toast.makeText(this@AddUpdateListActivity,"All entries are valid.", Toast.LENGTH_SHORT).show()
+                            val mesbgListerDetails: MesbgLister = MesbgLister(
+                                mImagePath,
+                                Constants.ARMY_IMAGE_SOURCE_LOCAL,
+                                title,
+                                type,
+                                faction,
+                                list,
+                                points,
+                                notes,
+                                false
+                            )
+                            mMesbgListerViewModel.insert(mesbgListerDetails)
+                            Toast.makeText(this@AddUpdateListActivity, "You've added army details successfully.", Toast.LENGTH_SHORT).show()
+                            Log.i("Insertion", "Success")
+                            finish()
                         }
                     }
                 }
