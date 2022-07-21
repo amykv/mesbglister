@@ -32,5 +32,7 @@
     <string name="err_msg_select_army_points">Select army points value.</string>
     <string name="err_msg_enter_army_notes">Enter army notes.</string>
 
+    <string name="lbl_no_armies_added_yet">No armies added yet!</string>
+
 
 </resources>
