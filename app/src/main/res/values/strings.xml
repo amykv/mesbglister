@@ -35,5 +35,8 @@
 
     <string name="lbl_no_armies_added_yet">No armies added yet!</string>
 
+    <string name="army_details_fragment_layout">Army Details Fragment Layout</string>
+    <string name="title_army_details">Army Details</string>
+
 
 </resources>

@@ -9,7 +9,11 @@
         android:id="@+id/navigation_all_armies"
         android:name="com.arasvitkus.mesbglister.view.fragments.AllArmiesFragment"
         android:label="@string/title_all_armies"
-        tools:layout="@layout/fragment_all_armies" />
+        tools:layout="@layout/fragment_all_armies" >
+        <action
+            android:id="@+id/action_all_armies_to_army_details"
+            app:destination="@id/navigation_army_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorite_armies"
@@ -22,4 +26,10 @@
         android:name="com.arasvitkus.mesbglister.view.fragments.RandomArmyFragment"
         android:label="@string/title_random_army"
         tools:layout="@layout/fragment_random_army" />
+
+    <fragment
+        android:id="@+id/navigation_army_details"
+        android:name="com.arasvitkus.mesbglister.view.fragments.ArmyDetailsFragment"
+        android:label="@string/title_army_details"
+        tools:layout="@layout/fragment_army_details" />
 </navigation>

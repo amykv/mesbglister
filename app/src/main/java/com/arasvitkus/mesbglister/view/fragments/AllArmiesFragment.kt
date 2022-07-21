@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
@@ -66,6 +67,11 @@ class AllArmiesFragment : Fragment() {
                     }
                 }
         }
+    }
+
+    //Function to navigate to the action created in mobile_navigation.xml
+    fun armyDetails(){
+        findNavController().navigate(AllArmiesFragmentDirections.actionAllArmiesToArmyDetails())
     }
 
     // Override the onCreateOptionMenu and onOptionsItemSelected methods and launch the AddUpdateDishActivity on selection.

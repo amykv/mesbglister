@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.arasvitkus.mesbglister.databinding.ItemArmyLayoutBinding
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
+import com.arasvitkus.mesbglister.view.fragments.AllArmiesFragment
 import com.bumptech.glide.Glide
 
 class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<MesbgListerAdapter.ViewHolder>() {
@@ -44,6 +45,12 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
             .into(holder.ivArmyImage)
 
         holder.tvTitle.text = army.title
+
+        holder.itemView.setOnClickListener {
+            if(fragment is AllArmiesFragment){
+                fragment.armyDetails()
+            }
+        }
     }
 
     /**
