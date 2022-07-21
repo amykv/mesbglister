@@ -60,8 +60,6 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
         return armies.size
     }
 
-    // TODO Step 8: Create a function that will have the updated list of dishes that we will bind it to the adapter class.
-    // START
     fun armiesList(list: List<MesbgLister>) {
         armies = list
         notifyDataSetChanged()

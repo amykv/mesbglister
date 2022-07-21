@@ -16,6 +16,7 @@ import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.databinding.FragmentAllArmiesBinding
 import com.arasvitkus.mesbglister.view.activities.AddUpdateListActivity
+import com.arasvitkus.mesbglister.view.activities.MainActivity
 import com.arasvitkus.mesbglister.view.adapters.MesbgListerAdapter
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
@@ -72,6 +73,17 @@ class AllArmiesFragment : Fragment() {
     //Function to navigate to the action created in mobile_navigation.xml
     fun armyDetails(){
         findNavController().navigate(AllArmiesFragmentDirections.actionAllArmiesToArmyDetails())
+
+        if(requireActivity() is MainActivity){
+            (activity as MainActivity?)?.hideBottomNavigationView()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(requireActivity() is MainActivity){
+            (activity as MainActivity?)?.showBottomNavigationView()
+        }
     }
 
     // Override the onCreateOptionMenu and onOptionsItemSelected methods and launch the AddUpdateDishActivity on selection.
