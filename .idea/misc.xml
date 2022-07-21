@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_all_armies.xml" value="0.15" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.15" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.15" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/ic_vector_edit.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/ic_vector_gallery.xml" value="0.1655" />
         <entry key="app/src/main/res/drawable/ic_vector_photo_camera.xml" value="0.1655" />
