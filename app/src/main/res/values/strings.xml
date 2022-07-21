@@ -8,7 +8,7 @@
     <string name="add_army">Add Army</string>
 
     <string name="lbl_add_army">ADD ARMY</string>
-    <string name="image_contentDescription">image</string>
+    <string name="image_contentDescription">Army image</string>
     <string name="lbl_title">Title</string>
     <string name="lbl_type">Type</string>
     <string name="lbl_faction">Faction</string>
