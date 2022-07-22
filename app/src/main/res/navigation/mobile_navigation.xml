@@ -31,5 +31,10 @@
         android:id="@+id/navigation_army_details"
         android:name="com.arasvitkus.mesbglister.view.fragments.ArmyDetailsFragment"
         android:label="@string/title_army_details"
-        tools:layout="@layout/fragment_army_details" />
+        tools:layout="@layout/fragment_army_details">
+        <argument
+            android:name="armyDetails"
+            app:argType="com.arasvitkus.mesbglister.model.entities.MesbgLister"
+            />
+    </fragment>
 </navigation>

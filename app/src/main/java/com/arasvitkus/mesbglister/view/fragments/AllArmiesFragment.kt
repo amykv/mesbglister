@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.databinding.FragmentAllArmiesBinding
+import com.arasvitkus.mesbglister.model.entities.MesbgLister
 import com.arasvitkus.mesbglister.view.activities.AddUpdateListActivity
 import com.arasvitkus.mesbglister.view.activities.MainActivity
 import com.arasvitkus.mesbglister.view.adapters.MesbgListerAdapter
@@ -71,8 +72,10 @@ class AllArmiesFragment : Fragment() {
     }
 
     //Function to navigate to the action created in mobile_navigation.xml
-    fun armyDetails(){
-        findNavController().navigate(AllArmiesFragmentDirections.actionAllArmiesToArmyDetails())
+    fun armyDetails(mesbgLister: MesbgLister ){
+        findNavController().navigate(AllArmiesFragmentDirections.actionAllArmiesToArmyDetails(
+            mesbgLister
+        ))
 
         if(requireActivity() is MainActivity){
             (activity as MainActivity?)?.hideBottomNavigationView()

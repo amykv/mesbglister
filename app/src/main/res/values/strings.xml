@@ -13,8 +13,8 @@
     <string name="lbl_title">Title</string>
     <string name="lbl_type">Type</string>
     <string name="lbl_faction">Faction</string>
-    <string name="lbl_list">List</string>
-    <string name="lbl_points">Points</string>
+    <string name="lbl_list">Army List</string>
+    <string name="lbl_points">Total Points</string>
     <string name="lbl_notes">Notes</string>
 
     <string name="title_select_image_action">Select Image Action</string>
@@ -38,5 +38,6 @@
     <string name="army_details_fragment_layout">Army Details Fragment Layout</string>
     <string name="title_army_details">Army Details</string>
 
+    <string name="lbl_estimate_victory_percentage">Estimated victory probability is 50%.</string>
 
 </resources>

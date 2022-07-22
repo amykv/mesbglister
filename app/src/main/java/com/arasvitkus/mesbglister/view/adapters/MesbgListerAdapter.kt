@@ -48,7 +48,7 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
 
         holder.itemView.setOnClickListener {
             if(fragment is AllArmiesFragment){
-                fragment.armyDetails()
+                fragment.armyDetails(army)
             }
         }
     }

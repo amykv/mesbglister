@@ -1,9 +1,12 @@
 package com.arasvitkus.mesbglister.model.entities
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "army_list_table")
 data class MesbgLister (
     //Column in army_list_table
@@ -18,4 +21,4 @@ data class MesbgLister (
     @ColumnInfo(name = "notes") val armyNotes: String,
     @ColumnInfo(name = "favorite_army") val favoriteArmy: Boolean = false,
     @PrimaryKey(autoGenerate = true) val id: Int = 0 //automatically increment any entry in table. Generate new primary key, unique ID for that specific entry.
-)
+): Parcelable //Pass this data class as a string to make use, similar to serializable

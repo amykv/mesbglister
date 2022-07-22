@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/favorite_button_background.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/ic_all_armies.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.15" />
@@ -16,7 +17,7 @@
         <entry key="app/src/main/res/layout/dialog_custom_image_selection.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/dialog_custom_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_all_armies.xml" value="0.25833333333333336" />
-        <entry key="app/src/main/res/layout/fragment_army_details.xml" value="0.22644927536231885" />
+        <entry key="app/src/main/res/layout/fragment_army_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.21739130434782608" />
         <entry key="app/src/main/res/layout/item_army_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_custom_list.xml" value="0.21350364963503649" />
