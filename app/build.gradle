@@ -50,6 +50,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'androidx.palette:palette-ktx:1.0.0'
 
     //Custom dependencies
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
