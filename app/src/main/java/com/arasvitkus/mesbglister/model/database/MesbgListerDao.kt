@@ -3,6 +3,7 @@ package com.arasvitkus.mesbglister.model.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
 import kotlinx.coroutines.flow.Flow
 
@@ -16,4 +17,7 @@ interface MesbgListerDao {
 
     @Query("SELECT * FROM army_list_table ORDER BY ID")
     fun getAllArmiesList(): Flow<List<MesbgLister>>
+
+    @Update
+    fun updateFavoriteArmyDetails(mesbgLister: MesbgLister) //Coroutine function
 }

@@ -1,5 +1,6 @@
 package com.arasvitkus.mesbglister.view.fragments
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -7,11 +8,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
 import com.arasvitkus.mesbglister.R
+import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.databinding.FragmentArmyDetailsBinding
+import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
+import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -30,6 +37,10 @@ import java.util.*
 class ArmyDetailsFragment : Fragment() {
 
     private var mBinding : FragmentArmyDetailsBinding? = null
+
+    private val mFavArmyViewModel: MesbgListerViewModel by viewModels {
+        MesbgListerViewModelFactory(((requireActivity().application) as MesbgListerApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +107,46 @@ class ArmyDetailsFragment : Fragment() {
             mBinding!!.tvList.text = it.armyDetails.list
             mBinding!!.tvPoints.text = it.armyDetails.armyPoints
             mBinding!!.tvNotes.text = it.armyDetails.armyNotes
+
+            if(args.armyDetails.favoriteArmy){
+                mBinding!!.ivFavoriteArmy.setImageDrawable(ContextCompat.getDrawable(
+                    requireActivity(),
+                    R.drawable.ic_favorite_selected
+                ))
+            }else{
+                mBinding!!.ivFavoriteArmy.setImageDrawable(ContextCompat.getDrawable(
+                    requireActivity(),
+                    R.drawable.ic_favorite_unselected
+                ))
+            }
+        }
+
+        mBinding!!.ivFavoriteArmy.setOnClickListener {
+            args.armyDetails.favoriteArmy = !args.armyDetails.favoriteArmy
+
+            mFavArmyViewModel.update(args.armyDetails)
+
+            if(args.armyDetails.favoriteArmy){
+                mBinding!!.ivFavoriteArmy.setImageDrawable(ContextCompat.getDrawable(
+                    requireActivity(),
+                    R.drawable.ic_favorite_selected
+                ))
+                Toast.makeText(
+                    requireActivity(),
+                    resources.getString(R.string.msg_added_to_favorites),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else{
+                mBinding!!.ivFavoriteArmy.setImageDrawable(ContextCompat.getDrawable(
+                    requireActivity(),
+                    R.drawable.ic_favorite_unselected
+                ))
+                Toast.makeText(
+                    requireActivity(),
+                    resources.getString(R.string.msg_removed_from_favorites),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
     }

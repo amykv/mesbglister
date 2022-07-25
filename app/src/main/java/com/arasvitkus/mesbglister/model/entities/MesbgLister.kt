@@ -19,6 +19,6 @@ data class MesbgLister (
 
     @ColumnInfo(name = "points") val armyPoints: String,
     @ColumnInfo(name = "notes") val armyNotes: String,
-    @ColumnInfo(name = "favorite_army") val favoriteArmy: Boolean = false,
+    @ColumnInfo(name = "favorite_army") var favoriteArmy: Boolean = false,
     @PrimaryKey(autoGenerate = true) val id: Int = 0 //automatically increment any entry in table. Generate new primary key, unique ID for that specific entry.
 ): Parcelable //Pass this data class as a string to make use, similar to serializable

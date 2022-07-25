@@ -38,6 +38,9 @@
     <string name="army_details_fragment_layout">Army Details Fragment Layout</string>
     <string name="title_army_details">Army Details</string>
 
+    <string name="msg_added_to_favorites">You have added the army to your favorites.</string>
+    <string name="msg_removed_from_favorites">You have removed the army from your favorites.</string>
+
     <string name="lbl_estimate_victory_percentage">Estimated victory probability is 50%.</string>
 
 </resources>
