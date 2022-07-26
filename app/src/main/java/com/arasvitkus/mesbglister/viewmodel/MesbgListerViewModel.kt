@@ -23,6 +23,8 @@ class MesbgListerViewModel(private val repository: MesbgListerRepository) : View
     fun update(armies: MesbgLister) = CoroutineScope(Dispatchers.IO).launch {
         repository.updateMesbgListerData(armies)
     }
+
+    val favoriteArmies: LiveData<List<MesbgLister>> = repository.favoriteArmies.asLiveData()
 }
 
 //Class and function based from: https://developer.android.com/codelabs/android-room-with-a-view-kotlin#9

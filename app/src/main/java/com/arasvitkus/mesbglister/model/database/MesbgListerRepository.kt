@@ -18,4 +18,6 @@ class MesbgListerRepository(private val mesbgListerDao: MesbgListerDao) {
     suspend fun updateMesbgListerData(mesbgLister: MesbgLister){
         mesbgListerDao.updateFavoriteArmyDetails(mesbgLister)
     }
+
+    val favoriteArmies: Flow<List<MesbgLister>> = mesbgListerDao.getFavoriteArmiesList()
 }

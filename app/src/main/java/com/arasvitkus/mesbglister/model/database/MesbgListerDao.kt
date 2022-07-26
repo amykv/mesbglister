@@ -20,4 +20,7 @@ interface MesbgListerDao {
 
     @Update
     fun updateFavoriteArmyDetails(mesbgLister: MesbgLister) //Coroutine function
+
+    @Query("SELECT * FROM army_list_table WHERE favorite_army = 1") //true = 1
+    fun getFavoriteArmiesList() : Flow<List<MesbgLister>>
 }
