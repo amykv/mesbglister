@@ -63,6 +63,7 @@ class ArmyDetailsFragment : Fragment() {
         val args: ArmyDetailsFragmentArgs by navArgs()
         args.let{
             try{
+                // Load the army image in the ImageView.
                 Glide.with(requireActivity())
                     .load(it.armyDetails.image)
                     .centerCrop()
@@ -74,7 +75,7 @@ class ArmyDetailsFragment : Fragment() {
                             isFirstResource: Boolean
                         ): Boolean {
                             Log.e("TAG", "Error loading image", e)
-                            return false
+                            return false // important to return false so the error placeholder can be placed
                         }
 
                         override fun onResourceReady(
@@ -84,14 +85,14 @@ class ArmyDetailsFragment : Fragment() {
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            resource.let {
-                                Palette.from(resource!!.toBitmap()).generate(){
-                                        palette ->
+                            //resource.let {
+                                Palette.from(resource!!.toBitmap())
+                                    .generate { palette ->
                                     val intColor = palette?.vibrantSwatch?.rgb ?: 0 // Take vibrantSwatch rgb if it exists, if not, take zero
                                     mBinding!!.rlArmyDetailMain.setBackgroundColor(intColor)
                                  }
 
-                            }
+                            //}
                             return false
                         }
 
