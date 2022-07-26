@@ -42,5 +42,6 @@
     <string name="msg_removed_from_favorites">You have removed the army from your favorites.</string>
 
     <string name="lbl_estimate_victory_percentage">Estimated victory probability is 50%.</string>
+    <string name="lbl_no_favorite_armies_added_yet">No favorite armies added yet.</string>
 
 </resources>

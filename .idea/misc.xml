@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_all_armies.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/fragment_army_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.21739130434782608" />
+        <entry key="app/src/main/res/layout/fragment_favorite_armies.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/item_army_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_custom_list.xml" value="0.21350364963503649" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.271875" />

@@ -9,14 +9,24 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
+import com.arasvitkus.mesbglister.databinding.FragmentFavoriteArmiesBinding
+import com.arasvitkus.mesbglister.view.adapters.MesbgListerAdapter
 import com.arasvitkus.mesbglister.viewmodel.DashboardViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
 
 class FavoriteArmiesFragment : Fragment() {
 
+    //Create instance of ViewBinding
+    private var mBinding: FragmentFavoriteArmiesBinding? = null
+
+    /**
+     * To create the ViewModel used in the viewModels delegate, passing in an instance of MesbgListerViewModelFactory.
+     * This is constructed based on the repository retrieved from the FavDishApplication.
+     */
     private val mFavoriteArmyViewModel : MesbgListerViewModel by viewModels {
         MesbgListerViewModelFactory((requireActivity().application as MesbgListerApplication).repository)
     }
@@ -25,27 +35,49 @@ class FavoriteArmiesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_favorite_armies, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        textView.text = "Favorite Armies Fragment"
-        return root
+    ): View {
+        //Initialize mBinding
+        mBinding = FragmentFavoriteArmiesBinding.inflate(inflater, container, false)
+        return mBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /**
+         * Add an observer on the LiveData returned by getFavoriteArmiesList.
+         * The onChanged() method fires when the observed data changes and the activity is in the foreground.
+         */
         mFavoriteArmyViewModel.favoriteArmies.observe(viewLifecycleOwner) {
             armies ->
             armies.let{
-                if(it.isNotEmpty()){
-                    for(army in it){
-                        Log.i("Favorite Army", "${army.id} :: ${army.title}")
-                    }
-                }else{
-                    Log.i("List of Favorite Armies", "is empty.")
+                // Display the list of favorite armies using RecyclerView.
+                // Will not create a separate adapter class, will use the same that was created for AllArmies.
+
+                // Set the LayoutManager that this RecyclerView will use.
+                mBinding!!.rvFavoriteArmiesList.layoutManager =
+                    GridLayoutManager(requireActivity(), 2)
+                // Adapter class is initialized and list is passed in the param.
+                val adapter = MesbgListerAdapter(this@FavoriteArmiesFragment)
+                // Adapter instance is set to the recyclerview to inflate the items.
+                mBinding!!.rvFavoriteArmiesList.adapter = adapter
+
+                if (it.isNotEmpty()) {
+                    mBinding!!.rvFavoriteArmiesList.visibility = View.VISIBLE
+                    mBinding!!.tvNoFavoriteArmiesAvailable.visibility = View.GONE
+
+                    adapter.armiesList(it)
+                } else {
+                    mBinding!!.rvFavoriteArmiesList.visibility = View.GONE
+                    mBinding!!.tvNoFavoriteArmiesAvailable.visibility = View.VISIBLE
                 }
+                // END
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding = null //Destroy it in case it exists so it won't create future issues
     }
 }
