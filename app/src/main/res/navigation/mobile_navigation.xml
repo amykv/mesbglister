@@ -19,7 +19,11 @@
         android:id="@+id/navigation_favorite_armies"
         android:name="com.arasvitkus.mesbglister.view.fragments.FavoriteArmiesFragment"
         android:label="@string/title_favorite_armies"
-        tools:layout="@layout/fragment_favorite_armies" />
+        tools:layout="@layout/fragment_favorite_armies">
+        <action
+            android:id="@+id/action_favorite_armies_to_army_details"
+            app:destination="@id/navigation_army_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_random_army"

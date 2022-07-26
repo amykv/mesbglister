@@ -9,10 +9,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.databinding.FragmentFavoriteArmiesBinding
+import com.arasvitkus.mesbglister.model.entities.MesbgLister
+import com.arasvitkus.mesbglister.view.activities.MainActivity
 import com.arasvitkus.mesbglister.view.adapters.MesbgListerAdapter
 import com.arasvitkus.mesbglister.viewmodel.DashboardViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
@@ -76,8 +79,26 @@ class FavoriteArmiesFragment : Fragment() {
         }
     }
 
+    //mesbgLister is the object, MesbgLister is the class
+    fun armyDetails(mesbgLister: MesbgLister) {
+        findNavController().navigate(FavoriteArmiesFragmentDirections
+            .actionFavoriteArmiesToArmyDetails(mesbgLister))
+
+        if(requireActivity() is MainActivity){
+            (activity as MainActivity?)!!.hideBottomNavigationView()
+        }
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mBinding = null //Destroy it in case it exists so it won't create future issues
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(requireActivity() is MainActivity){
+            (activity as MainActivity?)!!.showBottomNavigationView()
+        }
     }
 }
