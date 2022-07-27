@@ -25,4 +25,6 @@ class MesbgListerRepository(private val mesbgListerDao: MesbgListerDao) {
     suspend fun deleteMesbgListerData(mesbgLister: MesbgLister){
         mesbgListerDao.deleteMesbgListerDetails(mesbgLister)
     }
+
+    fun filteredListArmies(value: String) : Flow<List<MesbgLister>> = mesbgListerDao.getFilteredArmiesList(value)
 }

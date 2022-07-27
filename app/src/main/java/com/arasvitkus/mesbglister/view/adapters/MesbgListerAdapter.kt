@@ -87,7 +87,7 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
         if(fragment is AllArmiesFragment){
             holder.ibMore.visibility = View.VISIBLE
         }else if (fragment is FavoriteArmiesFragment){
-            holder.ibMore.visibility = View.INVISIBLE
+            holder.ibMore.visibility = View.GONE
         }
     }
 

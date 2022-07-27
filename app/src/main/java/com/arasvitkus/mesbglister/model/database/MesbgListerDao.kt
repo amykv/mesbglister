@@ -23,4 +23,7 @@ interface MesbgListerDao {
 
     @Delete
     fun deleteMesbgListerDetails(mesbgLister: MesbgLister)
+
+    @Query("SELECT * FROM army_list_table WHERE type = :filterType")
+    fun getFilteredArmiesList(filterType: String): Flow<List<MesbgLister>>
 }

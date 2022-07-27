@@ -32,6 +32,10 @@ class AllArmiesFragment : Fragment() {
 
     private lateinit var mBinding : FragmentAllArmiesBinding
 
+    private lateinit var mMesbgListerAdapter: MesbgListerAdapter
+
+    private lateinit var mCustomListDialog: Dialog
+
     private val mMesbgListerViewModel: MesbgListerViewModel by viewModels{
         MesbgListerViewModelFactory((requireActivity().application as MesbgListerApplication).repository)
     }
@@ -57,9 +61,9 @@ class AllArmiesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mBinding.rvArmiesList.layoutManager = GridLayoutManager(requireActivity(), 2)
-        val mesbgListerAdapter = MesbgListerAdapter(this@AllArmiesFragment)
+        mMesbgListerAdapter = MesbgListerAdapter(this@AllArmiesFragment)
 
-        mBinding.rvArmiesList.adapter = mesbgListerAdapter
+        mBinding.rvArmiesList.adapter = mMesbgListerAdapter
 
         mMesbgListerViewModel.allArmiesList.observe(viewLifecycleOwner) {
             armies ->
@@ -68,7 +72,7 @@ class AllArmiesFragment : Fragment() {
                         mBinding.rvArmiesList.visibility = View.VISIBLE
                         mBinding.tvNoArmiesAddedYet.visibility = View.GONE
 
-                        mesbgListerAdapter.armiesList(it) // it is the list of armies from observer
+                        mMesbgListerAdapter.armiesList(it) // it is the list of armies from observer
                     }else{
                         mBinding.rvArmiesList.visibility = View.GONE
                         mBinding.tvNoArmiesAddedYet.visibility = View.VISIBLE
@@ -107,19 +111,20 @@ class AllArmiesFragment : Fragment() {
     }
 
     private fun filterArmiesListDialog(){
-        val customListDialog = Dialog(requireActivity())
+        mCustomListDialog = Dialog(requireActivity())
         val binding: DialogCustomListBinding = DialogCustomListBinding.inflate(layoutInflater)
 
-        customListDialog.setContentView(binding.root)
+        mCustomListDialog.setContentView(binding.root)
         binding.tvDialogCustomListTitle.text = resources.getString(R.string.title_select_item_to_filter)
         val armyTypes = Constants.armyTypes()
         armyTypes.add(0, Constants.ALL_ITEMS)
         binding.rvList.layoutManager = LinearLayoutManager(requireActivity())
 
-        val adapter = CustomListItemAdapter(requireActivity(), armyTypes,Constants.FILTER_SELECTION)
+        //Using this@AllArmiesFragment emphasizes to use this particular fragment
+        val adapter = CustomListItemAdapter(requireActivity(), this@AllArmiesFragment, armyTypes, Constants.FILTER_SELECTION)
 
         binding.rvList.adapter = adapter
-        customListDialog.show()
+        mCustomListDialog.show()
     }
 
     override fun onResume() {
@@ -151,5 +156,43 @@ class AllArmiesFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-    // END
+
+    fun filterSelection(filterItemSelection: String){
+        mCustomListDialog.dismiss()
+
+        Log.i("Filter Selection", filterItemSelection)
+
+        if(filterItemSelection == Constants.ALL_ITEMS){
+                mMesbgListerViewModel.allArmiesList.observe(viewLifecycleOwner) {
+                        armies ->
+                    armies.let{
+                        if(it.isNotEmpty()){
+                            mBinding.rvArmiesList.visibility = View.VISIBLE
+                            mBinding.tvNoArmiesAddedYet.visibility = View.GONE
+
+                            mMesbgListerAdapter.armiesList(it) // it is the list of armies from observer
+                        }else{
+                            mBinding.rvArmiesList.visibility = View.GONE
+                            mBinding.tvNoArmiesAddedYet.visibility = View.VISIBLE
+                        }
+                    }
+            }
+        } else {
+            mMesbgListerViewModel.getFilteredList(filterItemSelection).observe(viewLifecycleOwner){
+                armies ->
+                armies.let {
+                    if(it.isNotEmpty()){
+                        mBinding.rvArmiesList.visibility = View.VISIBLE
+                        mBinding.tvNoArmiesAddedYet.visibility = View.GONE
+
+                        //it is the filtered list
+                        mMesbgListerAdapter.armiesList(it)
+                    } else{
+                        mBinding.rvArmiesList.visibility = View.GONE
+                        mBinding.tvNoArmiesAddedYet.visibility = View.VISIBLE
+                    }
+                }
+            }
+        }
+    }
 }

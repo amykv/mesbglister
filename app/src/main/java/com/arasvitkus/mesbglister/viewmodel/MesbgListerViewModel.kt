@@ -29,6 +29,8 @@ class MesbgListerViewModel(private val repository: MesbgListerRepository) : View
     fun delete(army: MesbgLister) = CoroutineScope(Dispatchers.IO).launch {
         repository.deleteMesbgListerData(army)
     }
+
+    fun getFilteredList(value: String) : LiveData<List<MesbgLister>> = repository.filteredListArmies(value).asLiveData()
 }
 
 //Class and function based from: https://developer.android.com/codelabs/android-room-with-a-view-kotlin#9
