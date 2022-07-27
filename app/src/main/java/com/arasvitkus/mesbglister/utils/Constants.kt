@@ -11,6 +11,8 @@ object Constants {
     const val ARMY_IMAGE_SOURCE_LOCAL : String = "Local"
     const val ARMY_IMAGE_SOURCE_ONLINE : String = "Online"
 
+    const val EXTRA_ARMY_DETAILS: String = "ArmyDetails"
+
     fun armyTypes():ArrayList<String>{
         val list = ArrayList<String>()
         list.add("Good")

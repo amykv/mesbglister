@@ -66,6 +66,8 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
     private var mImagePath: String = ""
     private lateinit var mCustomListDialog: Dialog
 
+    private var mMesbgListerDetails: MesbgLister? = null
+
     private val mMesbgListerViewModel : MesbgListerViewModel by viewModels {
         MesbgListerViewModelFactory((application as MesbgListerApplication).repository)
     }
@@ -77,7 +79,32 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
 
         setContentView(mBinding.root)
 
+        if(intent.hasExtra(Constants.EXTRA_ARMY_DETAILS)) {
+            mMesbgListerDetails = intent.getParcelableExtra(Constants.EXTRA_ARMY_DETAILS)
+        }
+
+        //Order matters, setting up action bar before mMesbgListerDetails intent
         setupActionBar()
+
+        //Check if empty or not
+        mMesbgListerDetails?.let{
+            if(it.id != 0){
+                mImagePath = it.image
+                Glide.with(this@AddUpdateListActivity)
+                    .load(mImagePath)
+                    .centerCrop()
+                    .into(mBinding.ivArmyImage)
+
+               mBinding.etTitle.setText(it.title)
+               mBinding.etType.setText(it.type)
+               mBinding.etFaction.setText(it.faction)
+               mBinding.etList.setText(it.list)
+               mBinding.etPoints.setText(it.armyPoints)
+               mBinding.etNotes.setText(it.armyNotes)
+
+               mBinding.btnAddArmy.text = resources.getString(R.string.lbl_update_army)
+            }
+        }
 
         //Assign onclicklistener to iv army image
         mBinding.ivAddArmyImage.setOnClickListener (this)
@@ -94,6 +121,16 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
     private fun setupActionBar(){
         //Assigning the toolbar
         setSupportActionBar(mBinding.toolbarAddArmyActivity)
+        if(mMesbgListerDetails != null && mMesbgListerDetails!!.id != 0){
+            supportActionBar?.let{
+                it.title = resources.getString(R.string.title_edit_army)
+            }
+        } else {
+            supportActionBar?.let {
+                it.title = resources.getString(R.string.title_add_army)
+            }
+        }
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mBinding.toolbarAddArmyActivity.setNavigationOnClickListener {
             onBackPressed()
@@ -182,21 +219,42 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
                                 resources.getString(R.string.err_msg_enter_army_notes), Toast.LENGTH_SHORT).show()
                         }
                         else -> {
+                            var armyID = 0
+                            var imageSource = Constants.ARMY_IMAGE_SOURCE_LOCAL
+                            var favoriteArmy = false
+
+                            mMesbgListerDetails?.let{
+                                if(it.id != 0){
+                                    armyID = it.id
+                                    imageSource = it.imageSource
+                                    favoriteArmy = it.favoriteArmy
+                                }
+                            }
+
                             val mesbgListerDetails: MesbgLister = MesbgLister(
                                 mImagePath,
-                                Constants.ARMY_IMAGE_SOURCE_LOCAL,
+                                imageSource,
                                 title,
                                 type,
                                 faction,
                                 list,
                                 points,
                                 notes,
-                                false
+                                favoriteArmy,
+                                armyID
                             )
-                            mMesbgListerViewModel.insert(mesbgListerDetails)
-                            Toast.makeText(this@AddUpdateListActivity, "You've added army details successfully.",
-                                Toast.LENGTH_SHORT).show()
-                            Log.e("Insertion", "Success")
+
+                            if(armyID == 0){
+                                mMesbgListerViewModel.insert(mesbgListerDetails)
+                                Toast.makeText(this@AddUpdateListActivity, "You've added army details successfully.",
+                                    Toast.LENGTH_SHORT).show()
+                                Log.i("Insertion", "Success")
+                            }else{
+                                mMesbgListerViewModel.update(mesbgListerDetails)
+                                Toast.makeText(this@AddUpdateListActivity, "You've updated your favorite army details successfully.",
+                                    Toast.LENGTH_SHORT).show()
+                                Log.e("Updating", "Success")
+                            }
                             finish()
                         }
                     }

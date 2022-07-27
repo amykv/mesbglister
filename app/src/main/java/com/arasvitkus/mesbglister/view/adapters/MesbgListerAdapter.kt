@@ -1,5 +1,6 @@
 package com.arasvitkus.mesbglister.view.adapters
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.databinding.ItemArmyLayoutBinding
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
+import com.arasvitkus.mesbglister.utils.Constants
+import com.arasvitkus.mesbglister.view.activities.AddUpdateListActivity
 import com.arasvitkus.mesbglister.view.fragments.AllArmiesFragment
 import com.arasvitkus.mesbglister.view.fragments.FavoriteArmiesFragment
 import com.bumptech.glide.Glide
@@ -66,7 +69,10 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
 
             popup.setOnMenuItemClickListener {
                 if(it.itemId == R.id.action_edit_army){
-                    Log.i("Clicked on", "Edit ${army.title}")
+                    val intent = Intent(fragment.requireActivity(), AddUpdateListActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_ARMY_DETAILS, army)
+                    fragment.requireActivity().startActivity(intent)
+
                 } else if(it.itemId == R.id.action_delete_army){
                     Log.i("Clicked on", "Delete ${army.title}")
                 }

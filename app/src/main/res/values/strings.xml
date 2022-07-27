@@ -47,4 +47,10 @@
     <string name="action_delete_army">DELETE ARMY</string>
     <string name="action_edit_army">EDIT ARMY</string>
 
+    <string name="title_add_army">Add Army</string>
+    <string name="title_edit_army">Edit Army</string>
+    <string name="lbl_update_army">UPDATE ARMY</string>
+
+
+
 </resources>
