@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/item_army_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_custom_list.xml" value="0.21350364963503649" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.271875" />
+        <entry key="app/src/main/res/menu/menu_adapter.xml" value="0.25729166666666664" />
         <entry key="app/src/main/res/menu/menu_all_armies.xml" value="0.1828125" />
       </map>
     </option>

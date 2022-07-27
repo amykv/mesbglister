@@ -1,9 +1,13 @@
 package com.arasvitkus.mesbglister.view.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.databinding.ItemArmyLayoutBinding
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
 import com.arasvitkus.mesbglister.view.fragments.AllArmiesFragment
@@ -55,6 +59,28 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
                 fragment.armyDetails(army)
             }
         }
+
+        holder.ibMore.setOnClickListener {
+            val popup = PopupMenu(fragment.context, holder.ibMore)
+            popup.menuInflater.inflate(R.menu.menu_adapter, popup.menu)
+
+            popup.setOnMenuItemClickListener {
+                if(it.itemId == R.id.action_edit_army){
+                    Log.i("Clicked on", "Edit ${army.title}")
+                } else if(it.itemId == R.id.action_delete_army){
+                    Log.i("Clicked on", "Delete ${army.title}")
+                }
+                true
+            }
+
+            popup.show()
+        }
+
+        if(fragment is AllArmiesFragment){
+            holder.ibMore.visibility = View.VISIBLE
+        }else if (fragment is FavoriteArmiesFragment){
+            holder.ibMore.visibility = View.INVISIBLE
+        }
     }
 
     /**
@@ -76,5 +102,6 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
         // Holds the TextView that will add each item to
         val ivArmyImage = view.ivArmyImage
         val tvTitle = view.tvArmyTitle
+        val ibMore = view.ibMore
     }
 }
