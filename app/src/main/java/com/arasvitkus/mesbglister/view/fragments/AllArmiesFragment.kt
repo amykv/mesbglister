@@ -1,6 +1,7 @@
 package com.arasvitkus.mesbglister.view.fragments
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,12 +14,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
+import com.arasvitkus.mesbglister.databinding.DialogCustomListBinding
 import com.arasvitkus.mesbglister.databinding.FragmentAllArmiesBinding
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
+import com.arasvitkus.mesbglister.utils.Constants
 import com.arasvitkus.mesbglister.view.activities.AddUpdateListActivity
 import com.arasvitkus.mesbglister.view.activities.MainActivity
+import com.arasvitkus.mesbglister.view.adapters.CustomListItemAdapter
 import com.arasvitkus.mesbglister.view.adapters.MesbgListerAdapter
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
@@ -101,6 +106,22 @@ class AllArmiesFragment : Fragment() {
         alertDialog.show()
     }
 
+    private fun filterArmiesListDialog(){
+        val customListDialog = Dialog(requireActivity())
+        val binding: DialogCustomListBinding = DialogCustomListBinding.inflate(layoutInflater)
+
+        customListDialog.setContentView(binding.root)
+        binding.tvDialogCustomListTitle.text = resources.getString(R.string.title_select_item_to_filter)
+        val armyTypes = Constants.armyTypes()
+        armyTypes.add(0, Constants.ALL_ITEMS)
+        binding.rvList.layoutManager = LinearLayoutManager(requireActivity())
+
+        val adapter = CustomListItemAdapter(requireActivity(), armyTypes,Constants.FILTER_SELECTION)
+
+        binding.rvList.adapter = adapter
+        customListDialog.show()
+    }
+
     override fun onResume() {
         super.onResume()
         if(requireActivity() is MainActivity){
@@ -120,6 +141,11 @@ class AllArmiesFragment : Fragment() {
         when (item.itemId) {
             R.id.action_add_army -> {
                 startActivity(Intent(requireActivity(), AddUpdateListActivity::class.java))
+                return true
+            }
+
+            R.id.action_filter_armies ->{
+                filterArmiesListDialog()
                 return true
             }
         }

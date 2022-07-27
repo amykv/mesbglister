@@ -13,6 +13,9 @@ object Constants {
 
     const val EXTRA_ARMY_DETAILS: String = "ArmyDetails"
 
+    const val ALL_ITEMS: String = "All"
+    const val FILTER_SELECTION: String = "FilterSelection"
+
     fun armyTypes():ArrayList<String>{
         val list = ArrayList<String>()
         list.add("Good")
@@ -37,7 +40,10 @@ object Constants {
         list.add("The Rangers")
         list.add("The Shire")
         list.add("Wanderers in the Wild")
+        //Mixed faction for break
         list.add("Mixed Alliance")
+        //Generic Legendary Legion - maybe not needed?
+        list.add("Legendary Legion")
         //LOTR Evil Factions below
         list.add("Angmar")
         list.add("Barad-Dur")

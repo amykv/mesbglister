@@ -56,6 +56,7 @@
     <string name="lbl_yes">Yes</string>
     <string name="lbl_no">No</string>
 
-
+    <string name="action_filter_armies">Filter Armies</string>
+    <string name="title_select_item_to_filter">SELECT ITEM TO FILTER</string>
 
 </resources>
