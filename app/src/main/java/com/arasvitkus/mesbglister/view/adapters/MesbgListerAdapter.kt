@@ -74,7 +74,9 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
                     fragment.requireActivity().startActivity(intent)
 
                 } else if(it.itemId == R.id.action_delete_army){
-                    Log.i("Clicked on", "Delete ${army.title}")
+                    if(fragment is AllArmiesFragment){
+                        fragment.deleteArmy(army)
+                    }
                 }
                 true
             }

@@ -51,6 +51,11 @@
     <string name="title_edit_army">Edit Army</string>
     <string name="lbl_update_army">UPDATE ARMY</string>
 
+    <string name="title_delete_army">Delete Army</string>
+    <string name="msg_delete_army_dialog">Are you sure you want to delete %1$s?</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="lbl_no">No</string>
+
 
 
 </resources>

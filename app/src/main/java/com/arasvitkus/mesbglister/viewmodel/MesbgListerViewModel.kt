@@ -25,6 +25,10 @@ class MesbgListerViewModel(private val repository: MesbgListerRepository) : View
     }
 
     val favoriteArmies: LiveData<List<MesbgLister>> = repository.favoriteArmies.asLiveData()
+
+    fun delete(army: MesbgLister) = CoroutineScope(Dispatchers.IO).launch {
+        repository.deleteMesbgListerData(army)
+    }
 }
 
 //Class and function based from: https://developer.android.com/codelabs/android-room-with-a-view-kotlin#9

@@ -1,5 +1,6 @@
 package com.arasvitkus.mesbglister.view.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -80,6 +81,24 @@ class AllArmiesFragment : Fragment() {
         if(requireActivity() is MainActivity){
             (activity as MainActivity?)?.hideBottomNavigationView()
         }
+    }
+
+    fun deleteArmy(army: MesbgLister){
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(resources.getString(R.string.title_delete_army))
+        builder.setMessage(resources.getString(R.string.msg_delete_army_dialog, army.title))
+        builder.setIcon(android.R.drawable.ic_dialog_alert)//built into android
+        builder.setPositiveButton(resources.getString(R.string.lbl_yes)){ dialogInterface, _ ->
+            mMesbgListerViewModel.delete(army)
+            dialogInterface.dismiss()
+        }
+        builder.setNegativeButton(resources.getString(R.string.lbl_no)){ dialogInterface, which ->
+            dialogInterface.dismiss()
+        }
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 
     override fun onResume() {

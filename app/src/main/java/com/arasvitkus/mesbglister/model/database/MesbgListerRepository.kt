@@ -20,4 +20,9 @@ class MesbgListerRepository(private val mesbgListerDao: MesbgListerDao) {
     }
 
     val favoriteArmies: Flow<List<MesbgLister>> = mesbgListerDao.getFavoriteArmiesList()
+
+    @WorkerThread
+    suspend fun deleteMesbgListerData(mesbgLister: MesbgLister){
+        mesbgListerDao.deleteMesbgListerDetails(mesbgLister)
+    }
 }

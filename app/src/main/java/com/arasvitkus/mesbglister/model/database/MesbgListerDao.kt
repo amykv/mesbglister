@@ -1,9 +1,6 @@
 package com.arasvitkus.mesbglister.model.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
 import kotlinx.coroutines.flow.Flow
 
@@ -23,4 +20,7 @@ interface MesbgListerDao {
 
     @Query("SELECT * FROM army_list_table WHERE favorite_army = 1") //true = 1
     fun getFavoriteArmiesList() : Flow<List<MesbgLister>>
+
+    @Delete
+    fun deleteMesbgListerDetails(mesbgLister: MesbgLister)
 }
