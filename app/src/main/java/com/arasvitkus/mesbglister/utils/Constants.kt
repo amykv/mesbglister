@@ -16,6 +16,12 @@ object Constants {
     const val ALL_ITEMS: String = "All"
     const val FILTER_SELECTION: String = "FilterSelection"
 
+    const val API_ENDPOINT: String = "/v2/quote"
+    const val API_KEY: String = "apiKey"
+    const val BASE_URL = "https://the-one-api.dev/"
+
+    const val API_KEY_VALUE: String = "lalala"
+
     fun armyTypes():ArrayList<String>{
         val list = ArrayList<String>()
         list.add("Good")
