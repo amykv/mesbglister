@@ -103,7 +103,12 @@ class ArmyDetailsFragment : Fragment() {
             }
 
             mBinding!!.tvTitle.text = it.armyDetails.title
-            mBinding!!.tvType.text = it.armyDetails.type.capitalize(Locale.ROOT)
+            //mBinding!!.tvType.text = it.armyDetails.type.capitalize(Locale.ROOT)
+            mBinding!!.tvType.text = it.armyDetails.type.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.ROOT
+                ) else it.toString()
+            }
             mBinding!!.tvFaction.text = it.armyDetails.faction
             mBinding!!.tvList.text = it.armyDetails.list
             mBinding!!.tvPoints.text = it.armyDetails.armyPoints

@@ -134,13 +134,15 @@ class AllArmiesFragment : Fragment() {
         }
     }
 
-    // Override the onCreateOptionMenu and onOptionsItemSelected methods and launch the AddUpdateDishActivity on selection.
+    // Override the onCreateOptionMenu and onOptionsItemSelected methods and launch the AddUpdateListActivity on selection.
     // START
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_all_armies, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
