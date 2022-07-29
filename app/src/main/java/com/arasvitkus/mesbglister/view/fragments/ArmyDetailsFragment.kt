@@ -1,13 +1,14 @@
 package com.arasvitkus.mesbglister.view.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -17,6 +18,8 @@ import androidx.palette.graphics.Palette
 import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.databinding.FragmentArmyDetailsBinding
+import com.arasvitkus.mesbglister.model.entities.MesbgLister
+import com.arasvitkus.mesbglister.utils.Constants
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
 import com.bumptech.glide.Glide
@@ -36,6 +39,8 @@ import java.util.*
  */
 class ArmyDetailsFragment : Fragment() {
 
+    private var mMesbgListerDetails: MesbgLister? = null
+
     private var mBinding : FragmentArmyDetailsBinding? = null
 
     private val mFavArmyViewModel: MesbgListerViewModel by viewModels {
@@ -45,7 +50,60 @@ class ArmyDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setHasOptionsMenu(true)
         }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_share, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.action_share_army -> {
+                val type = "text/plain"
+                val subject = "Checkout this army list"
+                var extraText = ""
+                val shareWith = "Share with"
+
+                mMesbgListerDetails?.let {
+                    /* var image = ""
+                    if(it.imageSource == Constants.ARMY_IMAGE_SOURCE_LOCAL){
+                        image = ""
+                    }*/
+
+                    /*var armyList = ""
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        armyList = Html.fromHtml(
+                            it.list,
+                            Html.FROM_HTML_MODE_COMPACT
+                        ).toString()
+                    } else {
+                        @Suppress("DEPRECATION")
+                        armyList = Html.fromHtml(it.list).toString()
+                    }*/
+
+                    extraText =
+                        //"$image \n" +
+                                "\n Title:  ${it.title} \n\n Type: ${it.type} \n\n Faction: ${it.faction}" +
+                                "\n\n List: \n ${it.list} \n\n Total Points: \n ${it.armyPoints}" +
+                                "\n\n Notes: ${it.armyNotes}"
+                }
+
+
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = type
+                intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+                intent.putExtra(Intent.EXTRA_TEXT, extraText)
+                startActivity(Intent.createChooser(intent, shareWith))
+
+                return true
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     //This will always be called before fun onViewCreated method
     override fun onCreateView(
@@ -61,6 +119,9 @@ class ArmyDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args: ArmyDetailsFragmentArgs by navArgs()
+
+        mMesbgListerDetails = args.armyDetails
+
         args.let{
             try{
                 // Load the army image in the ImageView.
