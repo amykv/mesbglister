@@ -1,23 +1,18 @@
 package com.arasvitkus.mesbglister.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.arasvitkus.mesbglister.R
 import com.arasvitkus.mesbglister.application.MesbgListerApplication
 import com.arasvitkus.mesbglister.databinding.FragmentFavoriteArmiesBinding
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
 import com.arasvitkus.mesbglister.view.activities.MainActivity
 import com.arasvitkus.mesbglister.view.adapters.MesbgListerAdapter
-import com.arasvitkus.mesbglister.viewmodel.DashboardViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModel
 import com.arasvitkus.mesbglister.viewmodel.MesbgListerViewModelFactory
 
@@ -28,7 +23,7 @@ class FavoriteArmiesFragment : Fragment() {
 
     /**
      * To create the ViewModel used in the viewModels delegate, passing in an instance of MesbgListerViewModelFactory.
-     * This is constructed based on the repository retrieved from the FavDishApplication.
+     * This is constructed based on the repository retrieved from the MesbgListerApplication.
      */
     private val mFavoriteArmyViewModel : MesbgListerViewModel by viewModels {
         MesbgListerViewModelFactory((requireActivity().application as MesbgListerApplication).repository)

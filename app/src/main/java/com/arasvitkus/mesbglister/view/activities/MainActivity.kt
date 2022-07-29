@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_all_armies, R.id.navigation_favorite_armies, R.id.navigation_random_army
+                R.id.navigation_all_armies, R.id.navigation_favorite_armies
             )
         )
         setupActionBarWithNavController(mNavController, appBarConfiguration)
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     fun hideBottomNavigationView(){
         mBinding.navView.clearAnimation()
-        // Animation to Navigate and transalte element by height over duration of 300ms
+        // Animation to Navigate and translate element by height over duration of 300ms
         mBinding.navView.animate().translationY(mBinding.navView.height.toFloat()).duration = 300
     }
 
