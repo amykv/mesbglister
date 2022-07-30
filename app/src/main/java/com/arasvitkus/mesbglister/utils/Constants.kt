@@ -31,6 +31,7 @@ object Constants {
         return list
     }
 
+    //List of all army factions, might need to create separate lists for LotR/Hobbit
     fun armyFactions():ArrayList<String>{
         val list = ArrayList<String>()
         //LOTR Good factions below
