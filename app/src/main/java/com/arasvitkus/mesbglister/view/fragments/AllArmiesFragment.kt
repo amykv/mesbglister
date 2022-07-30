@@ -32,10 +32,16 @@ class AllArmiesFragment : Fragment() {
 
     private lateinit var mBinding : FragmentAllArmiesBinding
 
+    //Global variable for MesbgListerAdapterClass
     private lateinit var mMesbgListerAdapter: MesbgListerAdapter
 
+    //Global variable for Filter List Dialog
     private lateinit var mCustomListDialog: Dialog
 
+    /**
+     * To create the ViewModel used in the viewModels delegate, passing in an instance of MesbgListerViewModelFactory.
+     * This is constructed based on the repository retrieved from the MesbgListerApplication.
+     */
     private val mMesbgListerViewModel: MesbgListerViewModel by viewModels{
         MesbgListerViewModelFactory((requireActivity().application as MesbgListerApplication).repository)
     }
@@ -52,7 +58,7 @@ class AllArmiesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mBinding = FragmentAllArmiesBinding.inflate(inflater, container, false)
         return mBinding.root
     }
@@ -60,11 +66,17 @@ class AllArmiesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Set the LayoutManager that this RecyclerView will use
         mBinding.rvArmiesList.layoutManager = GridLayoutManager(requireActivity(), 2)
+        //Adapter class is initialized and list is passed in the param.
         mMesbgListerAdapter = MesbgListerAdapter(this@AllArmiesFragment)
-
+        //adapter instance is set to the recyclerview to inflate the items
         mBinding.rvArmiesList.adapter = mMesbgListerAdapter
 
+        /**
+         * Add an observer on the LiveData returned by getAllArmiesList.
+         * The onChanged() method fires when the observed data changes and the activity is in the foreground.
+         */
         mMesbgListerViewModel.allArmiesList.observe(viewLifecycleOwner) {
             armies ->
                 armies.let{
@@ -81,7 +93,7 @@ class AllArmiesFragment : Fragment() {
         }
     }
 
-    //Function to navigate to the action created in mobile_navigation.xml
+    //Function to navigate to the action created in mobile_navigation.xml - Army Details Fragment
     fun armyDetails(mesbgLister: MesbgLister ){
         findNavController().navigate(AllArmiesFragmentDirections.actionAllArmiesToArmyDetails(
             mesbgLister
@@ -92,38 +104,59 @@ class AllArmiesFragment : Fragment() {
         }
     }
 
+    /**
+     * Method is used to show the Alert Dialog while deleting the army details.
+     *
+     * @param dish - Army details to delete.
+     */
     fun deleteArmy(army: MesbgLister){
         val builder = AlertDialog.Builder(requireActivity())
+        //set title for alert dialog
         builder.setTitle(resources.getString(R.string.title_delete_army))
+        //set message for alert dialog
         builder.setMessage(resources.getString(R.string.msg_delete_army_dialog, army.title))
         builder.setIcon(android.R.drawable.ic_dialog_alert)//built into android
+        //performing positive action
         builder.setPositiveButton(resources.getString(R.string.lbl_yes)){ dialogInterface, _ ->
             mMesbgListerViewModel.delete(army)
             dialogInterface.dismiss()
         }
-        builder.setNegativeButton(resources.getString(R.string.lbl_no)){ dialogInterface, which ->
+        //performing negative action
+        builder.setNegativeButton(resources.getString(R.string.lbl_no)){ dialogInterface, _ -> // the _ was which before
             dialogInterface.dismiss()
         }
 
+        // Create the AlertDialog
         val alertDialog: AlertDialog = builder.create()
-        alertDialog.setCancelable(false)
-        alertDialog.show()
+        // Set other dialog properties
+        alertDialog.setCancelable(false) //Not allow user to cancel after clicking on remaining screen area
+        alertDialog.show() //Show the dialog to UI
     }
 
+    /**
+     * A function to launch the custom dialog.
+     */
     private fun filterArmiesListDialog(){
         mCustomListDialog = Dialog(requireActivity())
         val binding: DialogCustomListBinding = DialogCustomListBinding.inflate(layoutInflater)
 
+        /*Set the screen content from a layout resource.
+        The resource will be inflated, adding all top-level views to the screen.*/
         mCustomListDialog.setContentView(binding.root)
+
         binding.tvDialogCustomListTitle.text = resources.getString(R.string.title_select_item_to_filter)
         val armyTypes = Constants.armyTypes()
         armyTypes.add(0, Constants.ALL_ITEMS)
+        // Set the LayoutManager that this RecyclerView will use.
         binding.rvList.layoutManager = LinearLayoutManager(requireActivity())
 
+        // Adapter class is initialized and list is passed in the param.
         //Using this@AllArmiesFragment emphasizes to use this particular fragment
         val adapter = CustomListItemAdapter(requireActivity(), this@AllArmiesFragment, armyTypes, Constants.FILTER_SELECTION)
 
+        // adapter instance is set to the recyclerview to inflate the items.
         binding.rvList.adapter = adapter
+        //Start the dialog and display it on screen.
         mCustomListDialog.show()
     }
 
@@ -159,6 +192,11 @@ class AllArmiesFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * A function to get the filter item selection and get the list from database accordingly.
+     *
+     * @param filterItemSelection
+     */
     fun filterSelection(filterItemSelection: String){
         mCustomListDialog.dismiss()
 

@@ -75,6 +75,11 @@ class FavoriteArmiesFragment : Fragment() {
     }
 
     //mesbgLister is the object, MesbgLister is the class
+    /**
+     * A function to navigate to the Army Details Fragment.
+     *
+     * @param mesbgLister
+     */
     fun armyDetails(mesbgLister: MesbgLister) {
         findNavController().navigate(FavoriteArmiesFragmentDirections
             .actionFavoriteArmiesToArmyDetails(mesbgLister))

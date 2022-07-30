@@ -39,10 +39,15 @@ import java.util.*
  */
 class ArmyDetailsFragment : Fragment() {
 
+    //Create global variable for Army Details and assign the args to it
     private var mMesbgListerDetails: MesbgLister? = null
 
     private var mBinding : FragmentArmyDetailsBinding? = null
 
+    /**
+     * To create the ViewModel used in the viewModels delegate, passing in an instance of MesbgListerViewModelFactory.
+     * This is constructed based on the repository retrieved from the MesbgListerApplication.
+     */
     private val mFavArmyViewModel: MesbgListerViewModel by viewModels {
         MesbgListerViewModelFactory(((requireActivity().application) as MesbgListerApplication).repository)
     }
@@ -50,6 +55,7 @@ class ArmyDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Set the setHasOptionsMenu to true
         setHasOptionsMenu(true)
         }
 
@@ -61,6 +67,8 @@ class ArmyDetailsFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
+            //Handle Item click action and share the army list details with others
+            //Not using army image yet
             R.id.action_share_army -> {
                 val type = "text/plain"
                 val subject = "Checkout this army list"
@@ -109,7 +117,7 @@ class ArmyDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         mBinding = FragmentArmyDetailsBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
@@ -120,6 +128,7 @@ class ArmyDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val args: ArmyDetailsFragmentArgs by navArgs()
 
+        //Initialize the MesbgLister global variable
         mMesbgListerDetails = args.armyDetails
 
         args.let{
@@ -135,6 +144,7 @@ class ArmyDetailsFragment : Fragment() {
                             target: Target<Drawable>?,
                             isFirstResource: Boolean
                         ): Boolean {
+                            //Log exception
                             Log.e("TAG", "Error loading image", e)
                             return false // important to return false so the error placeholder can be placed
                         }
