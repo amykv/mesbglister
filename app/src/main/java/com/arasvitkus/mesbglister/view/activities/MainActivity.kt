@@ -42,12 +42,18 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(mNavController, null)
     }
 
+    /**
+     * A function to hide the BottomNavigationView with animation.
+     */
     fun hideBottomNavigationView(){
         mBinding.navView.clearAnimation()
         // Animation to Navigate and translate element by height over duration of 300ms
         mBinding.navView.animate().translationY(mBinding.navView.height.toFloat()).duration = 300
     }
 
+    /**
+     * A function to show the BottomNavigationView with Animation.
+     */
     fun showBottomNavigationView(){
         mBinding.navView.clearAnimation()
         //Position back

@@ -42,10 +42,11 @@ class SplashActivity : AppCompatActivity() {
 
         splashAnimation.setAnimationListener(object: Animation.AnimationListener{
             override fun onAnimationStart(p0: Animation?) {
-                //TODO("Not yet implemented")
+                //Code to add for animation start execution
             }
 
             override fun onAnimationEnd(p0: Animation?) {
+                //Code for when the animation ends
                 Handler(Looper.getMainLooper()).postDelayed({
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     finish()
@@ -53,7 +54,7 @@ class SplashActivity : AppCompatActivity() {
             }
 
             override fun onAnimationRepeat(p0: Animation?) {
-                TODO("Not yet implemented")
+                //Code to add for animation repeat execution
             }
 
         })

@@ -65,6 +65,7 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
 
         holder.ibMore.setOnClickListener {
             val popup = PopupMenu(fragment.context, holder.ibMore)
+            //Inflating the Popup using xml file.
             popup.menuInflater.inflate(R.menu.menu_adapter, popup.menu)
 
             popup.setOnMenuItemClickListener {
@@ -81,7 +82,7 @@ class MesbgListerAdapter(private val fragment: Fragment): RecyclerView.Adapter<M
                 true
             }
 
-            popup.show()
+            popup.show() //Showing popup menu
         }
 
         if(fragment is AllArmiesFragment){
