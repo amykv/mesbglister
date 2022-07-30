@@ -6,12 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
 
+/**
+ * This is the backend. The database. This used to be done by the OpenHelper.
+ */
 @Database(entities = [MesbgLister::class], version = 1, exportSchema = false)
 abstract class MesbgListerRoomDatabase : RoomDatabase() {
 
     abstract fun mesbgListerDao(): MesbgListerDao
 
     companion object {
+        // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
         private var INSTANCE: MesbgListerRoomDatabase? = null
 

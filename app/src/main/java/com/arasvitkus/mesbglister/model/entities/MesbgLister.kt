@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+//Define table name
 @Entity(tableName = "army_list_table")
 data class MesbgLister (
     //Column in army_list_table
@@ -16,7 +17,7 @@ data class MesbgLister (
     @ColumnInfo val type: String,
     @ColumnInfo val faction: String,
     @ColumnInfo val list: String,
-
+    // Specifies the name of the column in the table to be different from the name of the member variable.
     @ColumnInfo(name = "points") val armyPoints: String,
     @ColumnInfo(name = "notes") val armyNotes: String,
     @ColumnInfo(name = "favorite_army") var favoriteArmy: Boolean = false, //true = 1

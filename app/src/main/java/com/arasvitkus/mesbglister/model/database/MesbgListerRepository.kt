@@ -4,14 +4,30 @@ import androidx.annotation.WorkerThread
 import com.arasvitkus.mesbglister.model.entities.MesbgLister
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * A Repository manages queries and allows use of multiple backends.
+ *
+ * The DAO is passed into the repository constructor as opposed to the whole database.
+ * This is because it only needs access to the DAO, since the DAO contains all the read/write methods for the database.
+ * There's no need to expose the entire database to the repository.
+ *
+ * @param mesbgListerDao - Pass the MesbgListerDao as the parameter.
+ */
 class MesbgListerRepository(private val mesbgListerDao: MesbgListerDao) {
 
+    /**
+     * By default Room runs suspend queries off the main thread, therefore, we don't need to
+     * implement anything else to ensure we're not doing long running database work
+     * off the main thread.
+     */
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insertMesbgListerData(mesbgLister: MesbgLister){
         mesbgListerDao.insertMesbgListerDetails(mesbgLister)
     }
 
+    // Room executes all queries on a separate thread.
+    // Observed Flow will notify the observer when the data has changed.
     val allArmiesList: Flow<List<MesbgLister>> = mesbgListerDao.getAllArmiesList()
 
     @WorkerThread
@@ -26,5 +42,6 @@ class MesbgListerRepository(private val mesbgListerDao: MesbgListerDao) {
         mesbgListerDao.deleteMesbgListerDetails(mesbgLister)
     }
 
+    //Function to get the filtered list of armies.
     fun filteredListArmies(value: String) : Flow<List<MesbgLister>> = mesbgListerDao.getFilteredArmiesList(value)
 }

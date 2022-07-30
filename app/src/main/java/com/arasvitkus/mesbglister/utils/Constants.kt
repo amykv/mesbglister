@@ -1,7 +1,8 @@
 package com.arasvitkus.mesbglister.utils
 
-import android.hardware.biometrics.BiometricManager
-
+/**
+ * This is used to define the constant values that can be used throughout the application.
+ */
 object Constants {
 
     const val ARMY_TYPE: String = "ArmyType"
@@ -9,18 +10,19 @@ object Constants {
     const val ARMY_POINTS: String = "ArmyPoints"
 
     const val ARMY_IMAGE_SOURCE_LOCAL : String = "Local"
-    const val ARMY_IMAGE_SOURCE_ONLINE : String = "Online"
+    //const val ARMY_IMAGE_SOURCE_ONLINE : String = "Online"
 
     const val EXTRA_ARMY_DETAILS: String = "ArmyDetails"
 
     const val ALL_ITEMS: String = "All"
     const val FILTER_SELECTION: String = "FilterSelection"
 
-    const val API_ENDPOINT: String = "/v2/quote"
-    const val API_KEY: String = "apiKey"
-    const val BASE_URL = "https://the-one-api.dev/"
-
-    const val API_KEY_VALUE: String = "lalala"
+        //Variables uses for testing API
+//    const val API_ENDPOINT: String = "/v2/quote"
+//    const val API_KEY: String = "apiKey"
+//    const val BASE_URL = "https://the-one-api.dev/"
+//
+//    const val API_KEY_VALUE: String = "lalala"
 
     fun armyTypes():ArrayList<String>{
         val list = ArrayList<String>()
@@ -63,7 +65,22 @@ object Constants {
         list.add("The Serpent Horde")
         list.add("Variags of Khand")
         list.add("Arnor")
-        //Hobbit Good/Evil to be added later
+        //The Hobbit Good factions below
+        list.add("Army of Thror")
+        list.add("Erebor Reclaimed")
+        list.add("Garrison of Dale")
+        list.add("Halls of Thranduil")
+        list.add("Radagast's Alliance")
+        list.add("The Army of Lake-town")
+        list.add("Thorin's Company")
+        //The Hobbit Evil factions below
+        list.add("Azog's Hunters")
+        list.add("Azog's Legion")
+        list.add("Dark Powers of Dol Guldur")
+        list.add("Desolator of the North")
+        list.add("Goblin Town")
+        list.add("The Dark Denizens of Mirkwood")
+        list.add("The Trolls")
         return list
     }
 
