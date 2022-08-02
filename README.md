@@ -16,3 +16,6 @@ MVVM structure.
   - [Room](https://developer.android.com/topic/libraries/architecture/room) - SQLite object mapping library.
 - [Glide](https://github.com/bumptech/glide) - An image loading library for Android.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
+
+
+App icon by Icons8 - https://icons8.com
