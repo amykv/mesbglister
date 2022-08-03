@@ -2,7 +2,7 @@
     <string name="app_name">MESBGLister</string>
 
     <string name="title_all_armies">All Armies</string>
-    <string name="title_favorite_armies">Favorite</string>
+    <string name="title_favorite_armies">Favorites</string>
     <string name="title_random_army">Random Army</string>
 
     <string name="splash_screen_title">MESBGLister</string>
