@@ -1,6 +1,8 @@
 # mesbglister
 Track and share custom army lists for Middle-Earth Strategy Battle Game.
 
+This app was created so my friends and I can quickly brainstorm and share army lists with each other. App is currently under review for Google Play store release, link will be shared here.
+
 MVVM structure.
 
 
