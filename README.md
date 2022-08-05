@@ -6,6 +6,11 @@ This app was created so my friends and I can quickly brainstorm and share army l
 MVVM structure.
 
 
+## Installation:
+MESBGLister will be released on Google Play Store.
+Currently, fork it or import the zip file into Android Studio. Run it from an emulator or transfer it onto the users device.
+
+
 ## Screenshots:
 
 <img src="https://user-images.githubusercontent.com/5241162/182973692-b0b00ada-93ce-4ca3-9bbb-2e7904901cad.jpg" alt="drawing" width="250"/> | <img src="https://user-images.githubusercontent.com/5241162/182973708-641f8d14-178f-466b-9d23-ed28f145bc2d.png" alt="drawing" width="250"/> | <img src="https://user-images.githubusercontent.com/5241162/182973713-d743749a-d829-4eb6-8d94-b4d70eeb4c01.png" alt="drawing" width="250"/>
