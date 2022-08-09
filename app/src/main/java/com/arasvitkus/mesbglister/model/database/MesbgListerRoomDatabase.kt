@@ -8,6 +8,7 @@ import com.arasvitkus.mesbglister.model.entities.MesbgLister
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
+ * Contains the database and serves as the main access point for the underlying connection in MESBGListers app data.
  */
 @Database(entities = [MesbgLister::class], version = 1, exportSchema = false)
 abstract class MesbgListerRoomDatabase : RoomDatabase() {

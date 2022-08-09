@@ -28,6 +28,9 @@ class MesbgListerRepository(private val mesbgListerDao: MesbgListerDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
+    //https://developer.android.com/kotlin/flow
+    //In coroutines, a flow is a type that can emit multiple values sequentially, as opposed to suspend functions that return only a single value.
+    // For example, you can use a flow to receive live updates from a database.
     val allArmiesList: Flow<List<MesbgLister>> = mesbgListerDao.getAllArmiesList()
 
     @WorkerThread

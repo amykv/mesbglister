@@ -17,7 +17,8 @@ object Constants {
     const val ALL_ITEMS: String = "All"
     const val FILTER_SELECTION: String = "FilterSelection"
 
-        //Variables uses for testing API
+        //Variables uses for testing API Lotr
+    //Might try different API.
 //    const val API_ENDPOINT: String = "/v2/quote"
 //    const val API_KEY: String = "apiKey"
 //    const val BASE_URL = "https://the-one-api.dev/"
@@ -85,6 +86,7 @@ object Constants {
         return list
     }
 
+    //List holding army points value.
     fun armyPoints(): ArrayList<String> {
         val list = ArrayList<String>()
         list.add("100")

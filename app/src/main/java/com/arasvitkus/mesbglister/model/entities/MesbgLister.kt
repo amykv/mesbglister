@@ -6,6 +6,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
+//Entity
+//https://medium.com/swlh/basic-implementation-of-room-database-with-repository-and-viewmodel-android-jetpack-8945b364d322
+// Entity represents a table within the database. Room creates a table for each class that has @Entity an annotation, and the fields in the class correspond to columns in the table.
+// Therefore, the entity classes are small model classes that don’t contain any logic.
+
+//Parcelize
+//https://dev.to/douglascf/easy-way-to-parcelize-on-kotlin-2d5i
+//On Android, Parcelable is an interface that a class can implement to be passed within an Intent from an Activity to another one, this way, transporting data from one
+// Activity to another one.
 @Parcelize
 //Define table name
 @Entity(tableName = "army_list_table")
