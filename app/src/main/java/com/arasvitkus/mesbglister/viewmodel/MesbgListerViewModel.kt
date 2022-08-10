@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 /**
  * The ViewModel's role is to provide data to the UI and survive configuration changes.
  * A ViewModel acts as a communication center between the Repository and the UI.
- * You can also use a ViewModel to share data between fragments.
+ * Can also use a ViewModel to share data between fragments.
  * The ViewModel is part of the lifecycle library.
  *
  * @param repository - The repository class is
