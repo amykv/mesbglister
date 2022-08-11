@@ -38,7 +38,7 @@ class CustomListItemAdapter(private val activity: Activity, private val fragment
      * an item.
      *
      * This new ViewHolder should be constructed with a new View that can represent the items
-     * of the given type. You can either create a new View manually or inflate it from an XML
+     * of the given type. Can either create a new View manually or inflate it from an XML
      * layout file.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -59,6 +59,9 @@
     <string name="action_filter_armies">Filter Armies</string>
     <string name="title_select_item_to_filter">SELECT ITEM TO FILTER</string>
 
+    <string name="action_open_settings">Settings</string>
+    <string name="title_select_setting_option">SELECT SETTING OPTION</string>
+
     <string name="action_share_army">Share Army</string>
 
 </resources>

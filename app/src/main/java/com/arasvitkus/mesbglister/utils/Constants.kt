@@ -17,6 +17,8 @@ object Constants {
     const val ALL_ITEMS: String = "All"
     const val FILTER_SELECTION: String = "FilterSelection"
 
+    const val SETTINGS_SELECTION: String = "Settings"
+
         //Variables uses for testing API Lotr
     //Might try different API.
 //    const val API_ENDPOINT: String = "/v2/quote"
@@ -29,6 +31,13 @@ object Constants {
         val list = ArrayList<String>()
         list.add("Good")
         list.add("Evil")
+        return list
+    }
+
+    fun settingTypes():ArrayList<String>{
+        val list = ArrayList<String>()
+        list.add("About")
+        list.add("Privacy Policy")
         return list
     }
 

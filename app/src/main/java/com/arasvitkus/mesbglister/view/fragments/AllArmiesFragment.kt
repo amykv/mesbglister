@@ -134,7 +134,7 @@ class AllArmiesFragment : Fragment() {
     }
 
     /**
-     * A function to launch the custom dialog.
+     * A function to launch the custom filter army type dialog.
      */
     private fun filterArmiesListDialog(){
         mCustomListDialog = Dialog(requireActivity())
@@ -153,6 +153,33 @@ class AllArmiesFragment : Fragment() {
         // Adapter class is initialized and list is passed in the param.
         //Using this@AllArmiesFragment emphasizes to use this particular fragment
         val adapter = CustomListItemAdapter(requireActivity(), this@AllArmiesFragment, armyTypes, Constants.FILTER_SELECTION)
+
+        // adapter instance is set to the recyclerview to inflate the items.
+        binding.rvList.adapter = adapter
+        //Start the dialog and display it on screen.
+        mCustomListDialog.show()
+    }
+
+    /**
+     * A function to launch the settings type dialog.
+     */
+    private fun settingsDialog(){
+        mCustomListDialog = Dialog(requireActivity())
+        val binding: DialogCustomListBinding = DialogCustomListBinding.inflate(layoutInflater)
+
+        /*Set the screen content from a layout resource.
+        The resource will be inflated, adding all top-level views to the screen.*/
+        mCustomListDialog.setContentView(binding.root)
+
+        binding.tvDialogCustomListTitle.text = resources.getString(R.string.title_select_setting_option)
+        val settingTypes = Constants.settingTypes()
+        //settingTypes()
+        // Set the LayoutManager that this RecyclerView will use.
+        binding.rvList.layoutManager = LinearLayoutManager(requireActivity())
+
+        // Adapter class is initialized and list is passed in the param.
+        //Using this@AllArmiesFragment emphasizes to use this particular fragment
+        val adapter = CustomListItemAdapter(requireActivity(), this@AllArmiesFragment, settingTypes, Constants.FILTER_SELECTION)
 
         // adapter instance is set to the recyclerview to inflate the items.
         binding.rvList.adapter = adapter
@@ -186,6 +213,11 @@ class AllArmiesFragment : Fragment() {
 
             R.id.action_filter_armies ->{
                 filterArmiesListDialog()
+                return true
+            }
+
+            R.id.action_open_settings ->{
+                settingsDialog()
                 return true
             }
         }
