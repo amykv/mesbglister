@@ -107,7 +107,7 @@ class AllArmiesFragment : Fragment() {
     /**
      * Method is used to show the Alert Dialog while deleting the army details.
      *
-     * @param dish - Army details to delete.
+     * @param army - Army details to delete.
      */
     fun deleteArmy(army: MesbgLister){
         val builder = AlertDialog.Builder(requireActivity())
