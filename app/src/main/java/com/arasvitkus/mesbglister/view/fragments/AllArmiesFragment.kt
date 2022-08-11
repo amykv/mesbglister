@@ -179,7 +179,7 @@ class AllArmiesFragment : Fragment() {
 
         // Adapter class is initialized and list is passed in the param.
         //Using this@AllArmiesFragment emphasizes to use this particular fragment
-        val adapter = CustomListItemAdapter(requireActivity(), this@AllArmiesFragment, settingTypes, Constants.FILTER_SELECTION)
+        val adapter = CustomListItemAdapter(requireActivity(), this@AllArmiesFragment, settingTypes, Constants.SETTINGS_SELECTION)
 
         // adapter instance is set to the recyclerview to inflate the items.
         binding.rvList.adapter = adapter

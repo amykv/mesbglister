@@ -21,7 +21,7 @@
         android:id="@+id/action_open_settings"
         android:icon="@drawable/ic_settings"
         android:orderInCategory="102"
-        android:title="@string/add_army"
+        android:title="@string/action_open_settings"
         app:showAsAction="always"
         />
 
