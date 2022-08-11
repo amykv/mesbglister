@@ -43,6 +43,7 @@ ViewModel: It exposes those data streams which are relevant to the View. Moreove
   - [Room](https://developer.android.com/topic/libraries/architecture/room) - SQLite object mapping library.
 - [Glide](https://github.com/bumptech/glide) - An image loading library for Android.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
+- [SDP](https://github.com/intuit/sdp) - An android library that provides a new size unit - sdp (scalable dp). This size unit scales with the screen size.
 
 
 App icon by Icons8 - https://icons8.com
