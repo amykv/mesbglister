@@ -160,32 +160,27 @@ class AllArmiesFragment : Fragment() {
         mCustomListDialog.show()
     }
 
-    /**
-     * A function to launch the settings type dialog.
-     */
-    private fun settingsDialog(){
-        mCustomListDialog = Dialog(requireActivity())
-        val binding: DialogCustomListBinding = DialogCustomListBinding.inflate(layoutInflater)
+    private fun displaySettings(){
+        val builder = AlertDialog.Builder(requireActivity())
+        //set title for alert dialog
+        builder.setTitle(resources.getString(R.string.title_select_setting_option))
+        //set message for alert dialog
+        builder.setMessage(resources.getString(R.string.msg_privacy_policy))
+        //builder.setIcon(android.R.drawable.ic_dialog_alert)//built into android
+        //performing positive action
+        builder.setPositiveButton(resources.getString(R.string.lbl_dismiss)){ dialogInterface, _ ->
+            //mMesbgListerViewModel.delete(army)
+            dialogInterface.dismiss()
+        }
 
-        /*Set the screen content from a layout resource.
-        The resource will be inflated, adding all top-level views to the screen.*/
-        mCustomListDialog.setContentView(binding.root)
+        // Create the AlertDialog
+        val alertDialog: AlertDialog = builder.create()
+        // Set other dialog properties
+        alertDialog.setCancelable(false) //Not allow user to cancel after clicking on remaining screen area
+        alertDialog.show() //Show the dialog to UI
 
-        binding.tvDialogCustomListTitle.text = resources.getString(R.string.title_select_setting_option)
-        val settingTypes = Constants.settingTypes()
-        //settingTypes()
-        // Set the LayoutManager that this RecyclerView will use.
-        binding.rvList.layoutManager = LinearLayoutManager(requireActivity())
-
-        // Adapter class is initialized and list is passed in the param.
-        //Using this@AllArmiesFragment emphasizes to use this particular fragment
-        val adapter = CustomListItemAdapter(requireActivity(), this@AllArmiesFragment, settingTypes, Constants.SETTINGS_SELECTION)
-
-        // adapter instance is set to the recyclerview to inflate the items.
-        binding.rvList.adapter = adapter
-        //Start the dialog and display it on screen.
-        mCustomListDialog.show()
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -217,7 +212,7 @@ class AllArmiesFragment : Fragment() {
             }
 
             R.id.action_open_settings ->{
-                settingsDialog()
+                displaySettings()
                 return true
             }
         }
