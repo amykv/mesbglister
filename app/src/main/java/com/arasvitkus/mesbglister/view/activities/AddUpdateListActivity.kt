@@ -192,7 +192,7 @@ class AddUpdateListActivity : AppCompatActivity(), View.OnClickListener {
 
                 R.id.btn_add_army -> {
                     //Define local variables and get the EditText values
-                    //For Army Image, globale variable is defined already
+                    //For Army Image, global variable is defined already
                     //Trimming empty spaces
                     val title = mBinding.etTitle.text.toString().trim { it <= ' '} //lambda expression to get rid of empty spaces
                     val type = mBinding.etType.text.toString().trim { it <= ' '}

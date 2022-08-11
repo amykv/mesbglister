@@ -4,6 +4,7 @@ import android.app.Application
 import com.arasvitkus.mesbglister.model.database.MesbgListerRepository
 import com.arasvitkus.mesbglister.model.database.MesbgListerRoomDatabase
 
+//Privacy Policy - https://avitkdev.blogspot.com/2022/08/privacy-policy-for-mesbglister.html
 //Define variable scope throughout application. Setup database and repository
 class MesbgListerApplication : Application() {
 
