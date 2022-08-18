@@ -1,13 +1,14 @@
 # mesbglister
 Create, edit, track, and share custom army lists for Middle-Earth Strategy Battle Game.
 
-This app was created so my friends and I can quickly brainstorm and share army lists with each other. App is currently under review for Google Play store release, link will be shared here.
+This app was created so my friends and I can quickly brainstorm and share army lists with each other. App is released on Google Play Store.
 
 Ideally plan to add more functionality, fixes, and features in future releases.
 
 ## Installation:
-MESBGLister will be released on Google Play Store.
-Currently, fork it or import the zip file into Android Studio. Run it from an emulator or transfer it onto the users device.
+Download from Google Play Store [HERE.](https://play.google.com/store/apps/details?id=com.arasvitkus.mesbglister&hl=en_US&gl=US)
+
+Can also fork it or import the zip file into Android Studio. Run it from an emulator or transfer it onto the users device.
 
 
 ## Screenshots:
