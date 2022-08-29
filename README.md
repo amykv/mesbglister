@@ -3,7 +3,7 @@ Create, edit, track, and share custom army lists for Middle-Earth Strategy Battl
 
 This app was created so my friends and I can quickly brainstorm and share army lists with each other. App is released on Google Play Store.
 
-Ideally plan to add more functionality, fixes, and features in future releases.
+This app uses XML with its views. Ideally plan to add more functionality, fixes, and features in future releases, maybe a rewrite using Jetpack Compose.
 
 ## Installation:
 Download from Google Play Store [HERE.](https://play.google.com/store/apps/details?id=com.arasvitkus.mesbglister&hl=en_US&gl=US)
