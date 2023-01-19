@@ -26,7 +26,7 @@ interface MesbgListerDao {
      * or from another suspension function.
      */
 
-    // Function to instert favorite list details to the local database using Room.
+    // Function to insert favorite list details to the local database using Room.
     //Had to remove suspend prefix from function to get to work
     //Potential solution due to suspend: https://youtrack.jetbrains.com/issue/KT-49761
     @Insert
