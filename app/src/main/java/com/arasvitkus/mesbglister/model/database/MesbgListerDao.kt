@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 https://developer.android.com/reference/android/arch/persistence/room/Dao
 Marks the class as a Data Access Object.
 
-Data Access Objects are the main classes where you define your database interactions. They can include a variety of query methods.
+Data Access Objects are the main classes where one can define database interactions. They can include a variety of query methods.
 
 The class marked with @Dao should either be an interface or an abstract class. At compile time, Room will generate an implementation of this class when it is referenced by a Database.
 */
