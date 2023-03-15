@@ -3,7 +3,7 @@ v1.1
 
 Create, edit, track, and share custom army lists for Middle-Earth Strategy Battle Game.
 
-This app was created so my friends and I can quickly brainstorm and share army lists with each other. App is released on Google Play Store.
+This app was created so users can quickly brainstorm and share army lists with each other. App is released on Google Play Store.
 
 This app uses XML with its views.
 
